@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Student Insights Dashboard</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f6f7fb;--card:#fff;--tx:#14171f;--mu:#667085;--ac:#1f3a5f;--bd:#e3e6ee;color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1218;--card:#181c25;--tx:#eef0f5;--mu:#9aa3b5;--ac:#7aa2e3;--bd:#2a3040;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1218;--card:#181c25;--tx:#eef0f5;--mu:#9aa3b5;--ac:#7aa2e3;--bd:#2a3040;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:24px 16px 40px}h1{font-size:1.6rem;margin:0}p.s{color:var(--mu);margin:4px 0 16px}
+.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px}.c{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px}
+.k b{display:block;font-size:1.6rem;color:var(--ac)}.k span{color:var(--mu);font-size:.85rem}h2{font-size:1rem;margin:0 0 10px}
+.row{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:.9rem}.row i{flex:0 0 64px;font-style:normal;color:var(--mu)}.bar{height:16px;background:var(--ac);border-radius:4px;min-width:2px}.row em{font-style:normal;font-weight:600}
+.grid{display:grid;gap:14px}.note{color:var(--mu);font-size:.85rem;margin-top:14px}
+</style></head><body><main>
+<h1>Student Insights Dashboard</h1><p class="s">Pandas-cleaned sample data, served by a FastAPI service.</p>
+<div class="k" id="k"></div>
+<div class="grid"><div class="c"><h2>Average score by branch</h2><div id="b"></div></div>
+<div class="c"><h2>Score distribution</h2><div id="d"></div></div></div>
+<p class="note" id="n"></p></main>
+<script>
+var D=__DATA__;
+function bars(id,obj,max){var h="";Object.keys(obj).forEach(function(k){h+='<div class="row"><i>'+k+'</i><div class="bar" style="width:'+(obj[k]/max*65)+'%"></div><em>'+obj[k]+'</em></div>'});document.getElementById(id).innerHTML=h}
+document.getElementById("k").innerHTML=[[D.rows,"students analysed"],[D.avg_score,"average score"],[D.corr_study_score,"study hours vs score (r)"],[D.corr_attendance_score,"attendance vs score (r)"]].map(function(x){return '<div class="c"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>'}).join("");
+bars("b",D.by_branch,Math.max.apply(null,Object.values(D.by_branch)));
+bars("d",D.distribution,Math.max.apply(null,Object.values(D.distribution)));
+document.getElementById("n").textContent="Synthetic dataset. "+D.dropped_rows+" invalid rows were removed during cleaning. Study hours show the strongest link with score.";
+</script></body></html>

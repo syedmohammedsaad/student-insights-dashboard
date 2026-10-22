@@ -1,0 +1,23 @@
+{
+  "rows": 275,
+  "avg_score": 84.2,
+  "corr_study_score": 0.85,
+  "corr_attendance_score": 0.17,
+  "by_branch": {
+    "CSE-DS": 86.7,
+    "ISE": 85.4,
+    "CSE": 84.3,
+    "ME": 84.1,
+    "ECE": 79.9
+  },
+  "distribution": {
+    "0-40": 0,
+    "40-50": 0,
+    "50-60": 4,
+    "60-70": 31,
+    "70-80": 56,
+    "80-90": 96,
+    "90-100": 88
+  },
+  "dropped_rows": 25
+}
